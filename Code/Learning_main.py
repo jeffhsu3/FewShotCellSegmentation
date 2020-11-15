@@ -14,7 +14,7 @@ import sys
 import os
 import argparse
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Code import Meta_Learning,Supervised_Learning
+from Code import Meta_Learning, Supervised_Learning
 
 def addLearningArgs():
 
@@ -46,18 +46,22 @@ def addLearningArgs():
     parser.add_argument('--name',type=str,default='')
 
     return parser
-def checkmetamethods(metatrainlosses_args,metatrainlosses):
+
+
+def checkmetamethods(metatrainlosses_args, metatrainlosses):
     for metatrainloss in metatrainlosses_args:
         if metatrainloss not in metatrainlosses:
             raise ValueError(metatrainloss+" is undefined")
+
+
 def main():
 
     parser = addLearningArgs()
     args = parser.parse_args()
-    print(args)
-    checkmetamethods(args.metatrainlosses,metatrainlosses=['BCE', 'BCE_Entropy', 'BCE_Distillation', 'Combined'])
+    print(repr(args))
+    checkmetamethods(args.meta_train_losses, ['BCE', 'BCE_Entropy', 'BCE_Distillation', 'Combined'])
 
-    if args.lrmethod=='Meta_Learning':
+    if args.lr_method=='Meta_Learning':
         hyperparams = {'meta_lr': args.meta_lr,
                        'meta_epochs': args.meta_epochs,
                        'model_lr': args.lr,
@@ -76,7 +80,7 @@ def main():
         meta_learn.meta_train()
 
 
-    elif args.lrmethod=='Supervised_Learning':
+    elif args.lr_method=='Supervised_Learning':
         hyperparams = {'model_lr': args.lr,
                        'epochs': args.epochs,
                        'batchsize': 64,

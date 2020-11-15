@@ -1,0 +1,16 @@
+*.zip
+*.pyc
+
+BBB*/
+Code/Logging/
+Datasets/
+masks/
+models/
+images/
+__MACOSX/
+EM_groundtruth/
+EM_images/
+Logging/
+TNBC_NucleiSegmentation/
+groundtruth-drosophila-vnc-master/
+synthetic_2_ground_truth/
